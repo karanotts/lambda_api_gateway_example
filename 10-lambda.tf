@@ -1,3 +1,5 @@
+# S3 Bucket to store Lambda payload
+# Lambda function
 
 resource "random_pet" "lambda_bucket_name" {
   prefix = "list-bucket-content-function"
@@ -21,14 +23,14 @@ data "archive_file" "lambda_function" {
 resource "aws_s3_bucket_object" "list_bucket_content" {
   bucket = aws_s3_bucket.lambda_bucket.id
 
-  key    = "hello-world.zip"
+  key    = "src.zip"
   source = data.archive_file.lambda_function.output_path
 
   etag = filemd5(data.archive_file.lambda_function.output_path)
 }
 
 resource "aws_lambda_function" "list_bucket_content" {
-  function_name = "ListBucketContent"
+  function_name = "${var.project}_${var.environment}_${var.function_name}"
 
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_bucket_object.list_bucket_content.key
