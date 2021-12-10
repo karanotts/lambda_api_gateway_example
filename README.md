@@ -5,17 +5,17 @@
 Lorem ipsum, innit
 
 ## Usage:
-- Navigate to root directory and initialize Terraform:
 
-```terraform init```
+Run:
+- `terraform init` to initialise Terraform.
+- `terraform validate` to valdiate Terraform code.
+- `terraform apply` - to build AWS resources (leave default input values or provide your own)
 
-- Create resources:
+After Terraform completes provisioning resources, it will output URL for the API Gateway:
+- `echo $(terraform output -raw base_url)`
 
-```terraform apply```
-
-- Get the list of s3 bucket contents by calling: 
-
-```curl "$(terraform output -raw base_url)/list?bucket=$BUCKET_NAME_HERE"```
+Use this link combined with the name of the S3 bucket you want to see the contents of:
+- `curl "$(terraform output -raw base_url)/list?bucket=$(S3_BUCKET_NAME)`
 
 ## Requirements:
 
@@ -51,16 +51,3 @@ Lorem ipsum, innit
 | function_name | Name of the Lambda function. |
 | base_url | Base URL for API Gateway stage. |
 
-
-## Usage:
-
-Run:
-- `terraform init` to initialise Terraform.
-- `terraform validate` to valdiate Terraform code.
-- `terraform apply` - to build AWS resources (leave default input values or provide your own)
-
-After Terraform completes provisioning resources, it will output URL for the API Gateway:
-- `echo $(terraform output -raw base_url)`
-
-Use this link combined with the name of the S3 bucket you want to see the contents of:
-- `curl "$(terraform output -raw base_url)/list?bucket=$(S3_BUCKET_NAME)`
