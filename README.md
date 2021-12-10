@@ -1,8 +1,11 @@
 # Lambda function and API Gateway
 
-## About
+## About:
 
-Lorem ipsum, innit
+An example of triggering <strong>AWS Lambda Function</strong> using <strong>AWS API Gateway</strong>.
+
+This function will take AWS S3 bucket name as URL parameter `bucket=$(AWS_S3_BUCKET_NAME)` to list contents of that bucket. 
+
 
 ## Usage:
 
